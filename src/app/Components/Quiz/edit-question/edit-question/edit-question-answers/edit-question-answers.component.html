@@ -1,0 +1,27 @@
+<div class="answer-main-container">
+    <div class="answerContainer mb-2" *ngFor="let ans of answerChoices; let i=index">
+        <div class="row answerInsideContainer border border-secondary mx-0 text-dark bg-light">
+            <div class="col-2 pb-2 border-secondary border-right">
+                <p class="mb-2 header">Options</p>
+                <label *ngIf="singleChoice"><input  type="radio" name="correctAnswer" [value]="i" [(ngModel)]="isCorrectChoice" (ngModelChange)="singleChoiceAnswer(i)" class="mr-2 mb-1">Correct</label>
+                <label *ngIf="!singleChoice"><input  type="checkbox" name="correctAnswerCheck" (ngModelChange)="answerChanged()" [(ngModel)]="ans.isCorrect" value="1" class="mr-2 mb-1">Correct</label><br>
+                    <!--label><input type="checkbox" name="allowHTML" (ngModelChange)="answerChanged()" [(ngModel)]="ans.allowHTML" class="mr-2">Allow HTML</label><br-->
+                        <label *ngIf="setAnswerPoints"><input type="number" class="mr-1 point-input" min="0"  name="points" (ngModelChange)="answerChanged()" [(ngModel)]="ans.points">Points</label>
+                  
+            </div>
+            <div class="col-10">
+                <p class="mb-2 header">Answer</p>
+                <textarea class="wt-100" rows="5" (ngModelChange)="answerChanged()" [(ngModel)]="ans.answers"></textarea>
+            </div>
+        </div>
+        <div class="row pt-3 pb-2 bg-light text-dark mx-0">
+            <button type="button" class="btn button-infoo mr-2" (click)="deleteAnswer(i)">Delete Answer</button>
+            <!-- <button type="button" class="btn btn-outline-infoo mr-2" value="Add Media">Add Media</button>
+            <button type="button" class="btn btn-outline-infoo" value="Move">Move</button> -->
+        </div>
+    </div>
+    <div>
+        <button type="button" class="btn button-infoo mt-2" (click)="addAnswer()">Add new answer</button>
+    </div>
+    
+</div>

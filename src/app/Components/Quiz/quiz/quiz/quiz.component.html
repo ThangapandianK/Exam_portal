@@ -1,0 +1,59 @@
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <!-- <div class="card-header">
+                    <h5>Products Category</h5>
+                </div> -->
+                <div class="card-body">
+                    <div class="custom-datatable">
+                        <!-- <button class="btn btn-primary mr-1 mb-3" style="float: left;">Edit Quiz</button> -->
+                        <button class="btn btn-primary mr-1 mb-3" style="float: left;" [routerLink]="['/dashboard/question/:id']">Add
+                            Questions</button>
+                        <button class="btn btn-primary mr-1 mb-3" style="float: right;"
+                            [routerLink]="['/dashboard/copyquestions']">Copy Questions From Another Quiz</button>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table class="table table-hover table-striped" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th> <input type="checkbox" [checked]="isAllCheckBoxChecked()"
+                                        (change)="checkAllCheckBox($event)" /> Name</th>
+                                <th style="width:60%">Category</th>
+                                <th>Points</th>
+                            </tr>
+                        </thead>
+                        <ng-container *ngFor="let quest of questions;  let i=index; ">
+                            <tbody style="height: 4rem;">
+
+                                <td style="position: absolute;padding: 0; height:30%">
+
+                                    <a style="margin:auto; flex: auto" data-abc="true">
+                                        <div class="dropdown">
+                                            <span class="login dropbtn"> <input type="checkbox" value="{{quest.id}}"
+                                                    [(ngModel)]="questions[i].checked" />{{quest.question}}</span>
+                                            <div class="dropdown-content">
+
+                                                <a  [routerLink]="['/dashboard/question', quest.questionId]">Edit
+                                                </a>|
+
+                                                <a   (click)="delete(quest.questionId)">Delete</a>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </td>
+                                <td> {{quest.categoryName}} </td>
+                                <td> {{quest.mark}} </td>
+
+                            </tbody>
+                        </ng-container>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->

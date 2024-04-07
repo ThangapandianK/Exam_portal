@@ -1,0 +1,120 @@
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+
+                <div class="card-header">
+                    <label style="font-size: 16px;font-weight: 600;">Add Quiz</label>               
+                </div>
+
+                <div class="card-body">
+                    <div class="row product-adding">
+                  
+                        <div class="col-xl-12">
+                            <form class="needs-validation" #quizForm="ngForm" novalidate>
+                                <div class="add-product-form">
+
+                                    <div class="form-group row" style="margin-bottom: 0px;">
+                                        <label for="templateName" style="font-size: 14px;" class="col-xl-4 col-sm-4 mb-0">Template Name:</label>
+                                        <input class="form-control col-xl-8 col-sm-7" name="templateName" #templateName="ngModel" [(ngModel)]="quiztemplate.templateName" id="templateName"
+                                            type="text"
+                                            [ngClass]="{ 'is-invalid': !templateName.valid && (templateName.touched || templateName.dirty) }"
+                                            required placeholder="Give your new template name here">
+                                            <span *ngIf="templateName.errors?.['required'] && (templateName.touched || templateName.dirty)" class="invalid-feedback" style="text-align: center;">
+                                                Template Name is required.
+                                              </span>                                              
+                                    </div>
+                                    
+                                    <br>
+                                    
+                                    <div class="form-group row" style="margin-bottom: 0px;">
+                                        <label for="timeLimit" style="font-size: 14px;" class="col-xl-4 col-sm-4 mb-0">Duration of the exam (seconds):</label>
+                                        <input class="form-control col-xl-8 col-sm-7" name="timeLimit" #timeLimit="ngModel" [(ngModel)]="quiztemplate.timeLimit" id="timeLimit"
+                                            type="number"
+                                            [ngClass]="{ 'is-invalid': !timeLimit.valid && (timeLimit.touched || timeLimit.dirty) }"
+                                            required placeholder="">
+                                        <span *ngIf="!timeLimit.valid && (timeLimit.touched || timeLimit.dirty)" class="invalid-feedback" style="text-align: center;">
+                                            Duration is required.
+                                        </span>
+                                    </div>                                    
+                                    <br>
+                                    
+                                    <div class="form-group row" style="margin-bottom: 0px;">
+                                        <label for="quizExecution" style="font-size: 14px;" class="col-xl-4 col-sm-4 mb-0">Execute Quiz only once</label>
+                                            <label style="font-size: 15px;font-weight: lighter;"><input type="checkbox" name="quizExecution" #quizExecution="ngModel" [(ngModel)]="quiztemplate.templatedata.quizExecution" id="quizExecution" /> Activate</label>  
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-xl-4 col-sm-4 mb-0"></label>
+                                        <span><small><b>If you enable this option, the quiz will be executed only once.</b></small></span> 
+                                    </div>
+
+                                    <br>
+
+                                    <div class="form-group row" style="margin-bottom: 0px;">
+                                        <label for="quizExecution" style="font-size: 14px;" class="col-xl-4 col-sm-4 mb-0">Quiz Overview</label>
+                                            <label style="font-size: 15px;font-weight: lighter;"><input type="checkbox" name="quizOverview" #quizOverview="ngModel" [(ngModel)]="quiztemplate.templatedata.quizOverview" id="quizOverview" /> Activate</label>  
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-xl-4 col-sm-4 mb-0"></label>
+                                        <span><small><b>If you enable this option, the quiz overview will be shown.</b></small></span> 
+                                    </div>
+
+                                    <br>
+
+                                    <div class="form-group row" style="margin-bottom: 0px">
+                                        <label for="validationCustom03" style="font-size: 14px;" class="col-xl-4 col-sm-4 mb-0">Only registered users are allowed to start the quiz</label>
+                                            <label style="font-size: 15px;font-weight: lighter;"><input type="checkbox" name="regUsersOnly" #regUsersOnly="ngModel" [(ngModel)]="quiztemplate.templatedata.regUsersOnly" id="regUsersOnly" /> Activate</label>  
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-xl-4 col-sm-4 mb-0"></label>
+                                        <span><small><b>If you enable this option, only registered users allowed start the quiz.</b></small></span> 
+                                    </div>
+
+                                    <br>
+                                    
+                                    <div class="form-group row">
+                                        <label for="validationCustom03" class="col-xl-3 col-sm-4 mb-0">Front Ui:</label>
+                                            <angular-editor
+                                                [config]="config"
+                                                [mentionConfig]="mentionConfig" name="frontPageHtml" #frontPageHtml="ngModel" [(ngModel)]="quiztemplate.frontPageHtml" id="frontPageHtml"
+                                                type="text"
+                                                [ngClass]="{ 'is-invalid':!frontPageHtml.valid && (frontPageHtml.touched||frontPageHtml.dirty) }"
+                                                required="" placeholder="">
+                                            </angular-editor>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="validationCustom03" class="col-xl-3 col-sm-4 mb-0">End Ui:</label>
+                                            <angular-editor style="width: 100%;"
+                                                [config]="config"
+                                                [mentionConfig]="mentionConfig" name="resultPageHtml" #resultPageHtml="ngModel" [(ngModel)]="quiztemplate.resultPageHtml" id="resultPageHtml"
+                                                type="text"
+                                                [ngClass]="{ 'is-invalid':!resultPageHtml.valid && (resultPageHtml.touched||resultPageHtml.dirty) }"
+                                                required="" placeholder="">
+                                            </angular-editor>
+                                    </div>
+
+                                </div>
+                            </form>
+
+                            <div class="form-group row mb-0" style="float: right;">
+                                <div class="product-buttons">
+                                    
+                                    <button *ngIf="quizTemplateId" type="button" class="btn btn-primary mr-1" (click)="updateTemp()">Update</button>
+                                    <button *ngIf="!quizTemplateId" type="submit" class="btn btn-primary mr-1" [disabled]="quizForm.invalid" (click)="createtemp()">Add</button>
+                                    <button type="button" class="btn btn-light">Discard</button>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->

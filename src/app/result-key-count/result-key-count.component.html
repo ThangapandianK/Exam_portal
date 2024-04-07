@@ -1,0 +1,15 @@
+<table class="styled-table">
+    <thead>
+      <tr>
+        <th>Key</th>
+        <th>Count</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let keyValuePair of keyboardData | keyvalue">
+        <td>{{ keyValuePair.key }}</td>
+        <td>{{ keyValuePair.value }}</td>
+      </tr>
+    </tbody>
+  </table>
+  

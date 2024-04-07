@@ -1,0 +1,100 @@
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card" style="min-height: 400px;">
+        <div class="card-header">
+          <label class="lable">Result View: </label>
+        </div>
+        <div class="card-body"> <!-- Added padding-left here -->
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label>Institute Name</label>
+                <select name="batchlist" class="form-control" (change)="getBatchDetail($event)">
+                  <option>--Institute Name--
+                  </option>
+                  <option *ngFor="let get of college" [value]="get.institutionId">
+                    {{get.institutionName}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label>Batch List</label>
+                <select name="batchlist" class="form-control" (change)="getBatchId($event)">
+                  <option *ngIf="batchdisable">--Batch Name--
+                  </option>
+                  <option *ngFor="let batch of batchList" [value]="batch.batchId">
+                    {{batch.batchName}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-1 align-self-end">
+              <div class="form-group text-right">
+                <button type="button" class="btn btn-primary"
+                  (click)="getCandidate(this.selectedBatchId)" [disabled]="isDisabled">Click</button>
+              </div>
+            </div>
+
+            <div class="col-sm-3 align-self-end">
+              <div class="form-group text-right">
+                <button type="button" class="btn btn-primary" class="btn btn-secondary"
+                  (click)=" download()">Export</button>
+              </div>
+            </div>
+          </div>
+
+          <table class="table table-hover table-striped" style="width:100%" *ngIf="CandidateDetails !== null">
+            <thead>
+              <tr>
+                <th style="border-top: none;">No</th>
+                <th style="border-top: none;">FirstName</th>
+                <th style="border-top: none;">LastName</th>
+                <th style="border-top: none;">EmailId</th>
+                <th style="border-top: none;">PhoneNumber</th>
+                <th style="border-top: none;">TotalMark</th>
+                <th style="border-top: none;">ScreenShot</th>
+                <th style="border-top: none;">Warnings</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="CandidateDetails && CandidateDetails.length > 0">
+    
+              <tr *ngFor="let CandidateDetail of CandidateDetails | paginate: {
+                itemsPerPage: tablesize,
+                currentPage: page,
+                totalItems: count
+            }; index as i">
+                <td>{{i + 1}}</td>
+                <td>{{CandidateDetail.firstName}}</td>
+                <td>{{CandidateDetail.lastName}}</td>
+                <td>{{CandidateDetail.emailId}}</td>
+                <td>{{CandidateDetail.phoneNo}}</td>
+                <td>{{CandidateDetail.totalMark}}</td>
+                <td><button type="button" class="button" [routerLink]="['/dashboard/screenShot',CandidateDetail.candidateId]">View</button></td>
+                <td><button type="button" class="button" [routerLink]="['/dashboard/keyCount',CandidateDetail.candidateId]">View</button></td>
+              </tr>          
+            </tbody>
+            <tbody *ngIf="CandidateDetails && CandidateDetails.length === 0">
+              <tr>
+                <td colspan="12" class="text-center">
+                  <p>No data found.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="text-center">
+            <span> <pagination-controls 
+              previousLabel="Prev"
+              nextLabel="Next"
+              (pageChange)="onTableDataChange($event)">
+              </pagination-controls></span>
+          </div>                  
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

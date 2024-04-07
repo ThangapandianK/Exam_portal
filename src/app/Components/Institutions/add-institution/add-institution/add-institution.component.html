@@ -1,0 +1,83 @@
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <label style="font-size: 16px;font-weight: 600;">Add Institution: </label>
+                    <button type="button"  style="float: right;margin-left: 1%;" class="btn btn-primary mr-1" (click)="addClg()">Add College</button>
+                        <input type="text" style="float: right;" name="institution" [(ngModel)]="institution" class="form-control digits col-xl-3 col-sm-2">
+                </div>
+                <div class="card-body">
+                    <table class="table table-hover table-striped" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th style="border-top: none;">No</th>
+                                <th style="width:60%; border-top: none;">College Name</th>
+                                <th style="border-top: none;">Batch List</th>
+                            </tr>
+                        </thead>
+                        <ng-container *ngFor="let clg of college; index as i">
+                            <tbody style="height: 4rem;">
+                                <td> {{i+1}} </td>
+                                <td style="position: absolute;padding: 0; height:30%;">
+                        <a style="margin:auto; flex: auto" data-abc="true">
+                            <div class="dropdown">
+                                <span class="login dropbtn">{{clg.institutionName}}</span>
+                                <div class="dropdown-content">
+                                    <a data-toggle="modal" data-target="#exampleModal" style="cursor:pointer;" (click)="open(content,clg)"  >Edit
+                                        </a>|
+                                    <!-- <a href="" data-toggle="modal" data-target="#modalLoginForm" >View
+                                       </a>| -->
+                                        
+                                    <a style="cursor:pointer;"  (click)="deleteInstution(clg.institutionId)">Delete</a>
+                                </div>
+                            </div>
+                        </a>
+                            </td>
+                              <td><a [routerLink]="['/dashboard/adduser',clg.institutionId]"><i class="fa fa-mail-forward" ></i></a></td>  
+                            </tbody>
+                        </ng-container>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Container-fluid Ends-->
+
+<!-------Modal starts-->
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title f-w-600" id="exampleModal">
+            Update College Lists</h5>
+        <button class="close btn btn-solid" aria-label="Close"
+            (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form class="needs-validation" #institutionForm="ngForm">
+            <div class="row">
+            <div class="form-group col-10">             
+                <input class="form-control col-md-12ng " id="validationCustom0" type="text" required="" placeholder="College Name" [(ngModel)]="selectedInstitution.institutionName" name="institutionName">
+            </div>
+            
+            <div class="form-group col-2"><button class="button" (click)="updateInstitution(selectedInstitution.institutionId,selectedInstitution.institutionName)"
+                [disabled]="institutionForm.invalid">
+            <i style="font-size: 25px;" class="fa fa-refresh"></i>
+        </button>
+        </div>
+            <div *ngIf="institutionForm.invalid && (institutionForm.dirty || institutionForm.touched)"
+            class="text-danger  mb-1 ml-3">
+         Category Name is required.
+       </div>
+            </div>
+        </form>
+    </div> 
+</ng-template>
+
+<!-------./Modal Ends-->
+
+ 

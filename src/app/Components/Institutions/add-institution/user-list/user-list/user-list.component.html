@@ -1,0 +1,42 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header"> 
+                    <label style="font-size: 16px;font-weight: 600;">User List:</label>
+                    <div style="float: right;">
+                        <input type="file" id="file" name="file" style="float:right;display: none;" #fileInput
+                               (change)="onFileSelect($event)" accept=".xlsx, .csv" />
+                        <button class="btn btn-primary mr-1" (click)="chooseFile()">
+                          Upload File
+                        </button>
+                      </div>
+                    <button type="button" style="float:right; margin-left: 1%;" class="btn btn-primary mr-1" (click)="AddUserModal()">
+                        Add User
+                      </button>     
+                </div>
+                <div class="card-body">
+                    <table class="table table-hover table-striped" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th style="border-top: none;">No</th>
+                                <th style="border-top: none;">FirstName</th>
+                                <th style="border-top: none;">LastName</th>
+                                <th style="border-top: none;">EmailId</th>
+                                <th style="border-top: none;">PhoneNumber</th>
+                            </tr>
+                              <tr *ngFor="let CandidateDetail of CandidateDetail; index as i">
+                                <td>{{i+1}}</td>
+                                <td>{{CandidateDetail.firstName}}</td>  
+                                <td>{{CandidateDetail.lastName}}</td>   
+                                <td>{{CandidateDetail.emailId}}</td>  
+                                <td>{{CandidateDetail.phoneNo}}</td>                                     
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

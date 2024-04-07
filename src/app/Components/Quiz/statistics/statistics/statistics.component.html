@@ -1,0 +1,99 @@
+<!-- Container-fluid starts-->
+<div class="container-fluid edit-container">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card border rounded-0">
+                <div class="card-header">
+                    <h5>Edit Questions</h5>
+                </div>
+
+
+            </div>
+            <div class="card card-container border rounded-0">
+                <h3 class="card-header">Filter</h3>
+
+                <div class="card-inner-container">
+                    <label class="description">
+                        Which users should be displayed: </label>
+                    <select>
+                        <option *ngFor="let user of users" [value]="user.id">{{user.name}}</option>
+
+                    </select>
+                </div>
+                <div class="card-inner-container">
+
+                    <label class="description">
+                        How many entries should be shown on one page:</label>
+
+                    <input name="pages" class="small-text" value="10" type="number" min="1">
+                </div>
+                <div class="card-inner-container">
+
+                    <label class="description">
+                        Search to date limit from</label>
+
+                    <input name="startDate" type="date"> <label class="description"> to</label> <input name="endDate"
+                        type="date">
+
+                </div>
+                <div class="card-inner-container">
+                    <div class="row pt-3 pb-2 bg-light text-dark mx-0">
+                        <button type="button" class="btn btn-outline-infoo" value="Move">Filter</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card card-container border rounded-0">
+                <!-- <h3 class="card-header">Filter</h3> -->
+                <div class="card-inner-container">
+                    <div class="pt-2">
+                        <table class="mt-2" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th class="border-0 text-center">UserName</th>
+                                    <th class="border-0 text-center">Question 1</th>
+                                    <th class="border-0 text-center">Question 2</th>
+                                    <th class="border-0 text-center">Date</th>
+                                    <th class="border-0 text-center">Correct</th>
+                                    <th class="border-0 text-center">Incorrect</th>
+                                    <th class="border-0 text-center">Solved</th>
+                                    <th class="border-0 text-center">Points</th>
+                                    <th class="border-0 text-center">Results</th>
+
+                                </tr>
+                            </thead>
+                            <ng-container *ngFor="let question of questions">
+                                <tbody>
+
+                                    <td class="aligncenter" style="padding-left: 0;padding-bottom: 10px; cursor: pointer;">
+                                        <a style="margin:auto; flex: auto" data-abc="true">
+                                            <div class="dropdown">
+                                                <span class="login dropbtn">{{question.username}}</span>
+                                                <div class="dropdown-content">
+                                                    <a [routerLink]="['/quizz']">Delete
+                                                    </a>
+
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </td>
+                                    <td class="aligncenter"> {{question.question1}} </td>
+                                    <td class="aligncenter"> {{question.question2}} </td>
+                                    <td class="aligncenter"> {{question.date}} </td>
+                                    <td class="aligncenter"> {{question.correct}} </td>
+                                    <td class="aligncenter"> {{question.incorrect}} </td>
+                                    <td class="aligncenter"> {{question.solved}} </td>
+                                    <td class="aligncenter"> {{question.points}} </td>
+                                    <td class="aligncenter"> {{question.result}} </td>
+
+
+                                </tbody>
+                            </ng-container>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->

@@ -1,0 +1,122 @@
+
+               <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <label style="font-size: 16px;font-weight: 600;">Batch Details: </label>
+                                    <button type="button"  style="float: right;margin-left: 1%;" class="btn btn-primary mr-1" (click)="addBatch()">Add Batch</button>
+                                        <input type="text" style="float: right;" name="institution" [(ngModel)]="addNewBatch" class="form-control digits col-xl-3 col-sm-2"> 
+                                </div>
+                                <div class="card-body">
+                                    <table class="table table-hover table-striped" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th style="border-top: none;">Batch No</th>
+                                                <th style="width:40%; border-top: none;">Batch Name</th>
+                                                <th style="border-top: none;">Action</th>
+                                                <th style="border-top: none;">User List</th>
+                                            </tr>
+                                            <tr *ngFor="let batch of batches; index as i">
+                                                <td>{{i+1}}</td>
+                                                <td>{{batch.batchName}}</td> 
+                                                <td><a data-toggle="modal" data-target="#exampleModal" style="cursor:pointer;" (click)="open(content,batch)"  ><app-feather-icons [icon]="'edit'"></app-feather-icons>
+                                                </a>   |
+                                                    <a style="cursor:pointer;" (click)="deleteBatch(batch.batchId)" ><app-feather-icons [icon]="'trash-2'"></app-feather-icons>
+                                                    </a></td>                                     
+                                                <td><a [routerLink]="['/dashboard/userlist',batch.batchId]"><i class="fa fa-mail-forward" ></i></a></td>  
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>       
+
+<!-- Container-fluid Ends-->
+
+
+<!-- Edit -->
+
+<!-- <ng-template #content let-modal>
+    <div class="modal-header" id="exampleModal">
+        <h5 class="modal-title f-w-600" id="exampleModal">
+            Update User Details</h5>
+        <button class="close btn btn-solid" aria-label="Close"
+            (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form class="needs-validation">
+            <div class="form-group row">
+                <label for="validationCustom0" class="col-xl-3 col-md-4"><span>*</span>Firstname</label>
+                <input class="form-control col-md-8" id="validationCustom0" type="text"  [(ngModel)]="candidateDetails.firstName" name="firstName">
+            </div>
+            <div class="form-group row">
+                <label for="validationCustom0" class="col-xl-3 col-md-4"><span>*</span>LastName</label>
+                <input class="form-control col-md-8" id="validationCustom0" type="text" required="" [(ngModel)]="candidateDetails.lastName" name="lastName">
+            </div>
+            <div class="form-group row">
+                <label for="validationCustom0" class="col-xl-3 col-md-4"><span>*</span>EmailId</label>
+                <input class="form-control col-md-8" id="validationCustom0" type="text" required="" [(ngModel)]="candidateDetails.emailId" name="emailId">
+            </div>
+            <div class="form-group row">
+                <label for="validationCustom0" class="col-xl-3 col-md-4"><span>*</span>Phone No</label>
+                <input class="form-control col-md-8" id="validationCustom0" type="text" required="" [(ngModel)]="candidateDetails.phoneNo" name="phoneNo">
+            </div>
+            <div class="form-group row">
+                <label for="validationCustom0" class="col-xl-3 col-md-4"><span>*</span>Password</label>
+                <input class="form-control col-md-8" id="validationCustom0" type="text" required="" [(ngModel)]="candidateDetails.password" name="password">
+            </div>
+            <div class="form-group row">
+                <label for="validationCustom0" class="col-xl-3 col-md-4"><span>*</span>WebSite</label>
+                <input class="form-control col-md-8" id="validationCustom0" type="text" required="" [(ngModel)]="candidateDetails.website" name="website">
+            </div>
+            <div class="form-group row">
+                <label for="validationCustom0" class="col-xl-3 col-md-4"><span>*</span>batchName</label>
+                <select [(ngModel)]="candidateDetails.batchId" name="batchName">
+                <option *ngFor="let Bat of batches" [value]="Bat.batchId">{{Bat.batchName}}</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary" (click)=updatecandidateDetails(candidateDetails.candidateId)>Save</button>
+        </form>
+    </div>
+   
+</ng-template> -->
+
+<!-- End Edit -->
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title f-w-600" id="exampleModal">
+            Batch Name</h5>
+        <button class="close btn btn-solid" aria-label="Close"
+            (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form class="needs-validation" #batchForm="ngForm"  novalidate>
+            <div class="row">
+              <div class="form-group col-10">
+                <input class="form-control col-md-12" id="validationCustom0" type="text" required
+                       placeholder="Batch Name" [(ngModel)]="batches.batchName" name="batchName"
+                       #batchName="ngModel">
+                <div *ngIf="batchName.invalid && (batchName.dirty || batchName.touched)"
+                     class="text-danger mt-2">
+                  Category Name is required.
+                </div>
+              </div>
+              <div class="form-group col-2">
+                <button class="button" type="submit" (click)="updateBatch()" *ngIf="batchName.dirty || batchName.touched">
+                    <i style="font-size: 25px;" class="fa fa-refresh"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+          
+    </div>
+   
+</ng-template>

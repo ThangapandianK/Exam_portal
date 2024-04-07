@@ -1,0 +1,63 @@
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="card">
+
+        <div class="card-header">
+            <h5>Quiz</h5>
+        </div>
+
+        <div class="card-body tab2-card">
+            
+            <form #quizForm="ngForm" class="needs-validation" novalidate="">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group row">
+                            <input class="form-control col-md-5" style="margin: auto; text-align: center;"
+                                name="quizName" #quizName="ngModel" [(ngModel)]="quiz.quizName" id="quizName"
+                                type="text"
+                                [ngClass]="{ 'is-invalid':!quizName.valid && (quizName.touched||quizName.dirty) }"
+                                required="" placeholder="Quiz Name">
+                            <div *ngIf="!quizName.valid && (quizName.touched||quizName.dirty)" class="invalid-feedback">
+                                <div style="text-align: center;"
+                                    *ngIf="(quizName.touched || quizForm.submitted) && quizName.errors">
+                                    Quiz Name is required
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <input class="form-control col-md-5" style="margin: auto; text-align: center;"
+                                name="description" #description="ngModel" [(ngModel)]="quiz.description"
+                                id="validationCustom0" type="text"
+                                [ngClass]="{ 'is-invalid':description.invalid && (description.touched||description.dirty) }"
+                                required="" placeholder="Quiz Description">
+                            <div *ngIf="!description.valid && (description.touched||description.dirty)"
+                                class="invalid-feedback">
+                                <div style="text-align: center;"
+                                    *ngIf="(description.touched || quizForm.submitted) && description.errors">
+                                    Quiz Description is required
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <select class="form-control col-md-5" style="margin: auto; text-align: center;" #quizTemplateId="ngModel" name="quizTemplateId"
+                            [(ngModel)]="quiz.quizTemplateId">
+                                <option [value]="temp.quizTemplateId" *ngFor="let temp of gettemplate">{{temp.templateName}}</option>
+                            </select>
+                        </div>
+                
+                        <div>
+                            <div style="text-align: center; margin: auto;">
+                                <button type="button" [disabled]="!quizForm.valid" *ngIf="isCreate"
+                                    class="btn btn-primary" (click)=create()>Create</button>
+                                    <button type="button" [disabled]="!quizForm.valid || !quizForm.touched || !quizForm.dirty"
+                                    class="btn btn-primary" *ngIf="isupdate" (click)="update()">update</button>
+                            </div>
+                        </div>
+                   </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->

@@ -1,0 +1,56 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card" style="min-height: 400px;">
+        <div class="card-header">
+          <label style="font-size: 16px; font-weight: 600;">Assign Quiz:</label>
+        </div>
+        <div class="card-body" style="padding-left: 20px;">
+          <div class="row" style="margin-top: 5px;">
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label>Quiz List</label>
+                <select name="quizlist" class="form-control" [(ngModel)]="quizlist">
+                  <option value="" disabled selected>Select Quiz</option>
+                  <option *ngFor="let quiz of quizList" [value]="quiz.quizId">{{ quiz.quizName }}</option>
+                </select>
+              </div>
+            </div>
+
+            
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label>Institute Name</label>
+                <select name="batchlist" class="form-control" (change)="getBatchDetail($event)">
+                  <option>--Institute Name--
+                  </option>
+                  <option *ngFor="let get of college" [value]="get.institutionId">
+                    {{get.institutionName}}</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label>Batch List</label>               
+                <ng-multiselect-dropdown
+                  [placeholder]="'Select Batch'"
+                  [settings]="dropdownSettings"
+                  [data]="batchList"
+                  [(ngModel)]="batchlist"
+                  name="batchlist" [disabled]="isDisabled">
+              </ng-multiselect-dropdown>
+              </div>
+            </div>
+            
+            <div class="col-sm-3 align-self-end">
+              <div class="form-group text-right">
+                <button type="button" class="btn btn-primary" (click)="assignQuiz()">Submit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

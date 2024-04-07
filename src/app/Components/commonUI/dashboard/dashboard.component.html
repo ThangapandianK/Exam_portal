@@ -1,0 +1,47 @@
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xl-3 col-md-6 xl-50">
+            <div class="card o-hidden widget-cards">
+                <div class="bg-warning card-body">
+                    <div class="media static-top-widget row">
+                        <div class="icons-widgets col-4">
+                            <div class="align-self-center text-center">
+                                <app-feather-icons [icon]="'users'" class="font-warning"></app-feather-icons>
+                            </div>
+                        </div>
+                        <div class="media-body col-8"><span class="m-0" style="font-size: xx-large;">{{candidateCount?.data}}</span>
+                            <!-- <h3 class="mb-0">$ <span class="counter" [CountTo]="6659" [from]="0"
+                                    [duration]="2">6659</span><small> This Month</small></h3> -->
+                        </div>
+                    </div>
+                    <span style="padding-left:30%;">Candidates</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 xl-50">
+            <div class="card o-hidden  widget-cards">
+                <div class="bg-secondary card-body">
+                    <div class="media static-top-widget row">
+                        <div class="icons-widgets col-4">
+                            <div class="align-self-center text-center">
+                                <app-feather-icons [icon]="'list'" class="font-secondary"></app-feather-icons>
+                            </div>
+                        </div>
+                        <div class="media-body col-8"><span class="m-0" style="font-size: xx-large;">{{quizCount?.data}}</span>
+                        </div>
+                    </div>
+                    <span style="padding-left:32%;">Quiz List</span>
+                </div>
+            </div>
+        </div>
+    
+        
+       
+       
+        
+            
+
+    </div>
+</div>
+<!-- Container-fluid Ends-->

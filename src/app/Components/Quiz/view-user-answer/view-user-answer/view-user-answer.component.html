@@ -1,0 +1,99 @@
+<div class="container-fluid">
+    <div class="col-md-12">
+      <div class="card card-primary">
+        <div class="card-body">
+          <div class="col-md-12">
+            <div class="card card-primary">
+              <div class="card-header bg-primary">
+                <h3 style="text-align:center;" class="card-title">
+                 RESULTS
+                </h3>
+              </div>
+            </div>
+            <br>
+            <br>
+            <table class="table table-bordered table-striped">
+              <thead class="thead-light">
+                <th>S.No</th>
+                <th>Email</th>
+                <th>Name</th>
+                <th>Phone Number</th>
+                <th>Points</th>
+                <th>Screenshots</th>
+                <th>Warnings</th>
+              
+              </thead>
+               <tbody
+                *ngFor="let result of results; index as i">
+                <td>{{i+1}}</td>
+                <td>{{result.email}}</td>
+                <td>{{result.name}}</td>
+                <td>{{(result.phone)}}</td>
+                <td>{{(result.points)}}</td>
+                
+                
+                <td>
+                  <button style="border:none;" data-toggle="modal" data-target="#screenshotModal"
+                    (click)="viewdetail()">
+                    <i style="font-size: 25px;" class="fa fa-eye"></i>
+                  </button>
+                </td>
+                <td>
+                  <button style="border:none;" data-toggle="modal" data-target="#warningModal"
+                    (click)="viewdetails()">
+                    <i style="font-size: 25px;" class="fa fa-eye"></i>
+                  </button>
+                </td>
+              </tbody> 
+            </table>
+          </div>
+        </div>
+        <!--Including the pagination control.-->
+        <!-- <div class="text-right">
+          <pagination-controls (pageChange)="pagination = $event"></pagination-controls>
+        </div> -->
+      </div>
+    </div>
+  </div>
+  <!-- -Modal Pop Up for Follow Up table-->
+   <!-- <div class="modal fade bd-example-modal-lg" id="screenshotModal" tabindex="-1" role="dialog"
+    aria-labelledby="screenshotModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title" id="screenshotModalLabel">Update Student Details</h2>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form class="form" [formGroup]="followUpDetails">
+            <div class="row">
+              <label>StudentName:</label>
+              <input type="text" class="form-control" formControlName="name">
+              <div *ngIf="submitted && followUpDetails.controls['name'].errors">
+                <span class="valid">* Enter the student name</span>
+              </div>
+              <div class="divider"></div>
+              <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th value="followUpId">FollowUp No</th>
+                    <th value="contactPerson">contactPerson</th>
+                    <th value="date">Date</th>
+                    <th value="remarks">Remark</th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let follows of followUpByEnquiry ">
+                  <td>{{follows.followUpId}}</td>
+                  <td>{{follows.contactPerson}}</td>
+                  <td>{{follows.date|date}}</td>
+                  <td>{{follows.remarks}}</td>
+                </tbody>
+              </table>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div> -->

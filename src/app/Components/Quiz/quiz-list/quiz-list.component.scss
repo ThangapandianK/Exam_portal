@@ -1,0 +1,56 @@
+.card{
+    background-color: #d9e2e2!important;
+}
+.login{
+    font-size: 20px;
+    font-weight: 700;
+    padding: 0px;
+    color: black;
+}
+.submenu:hover{
+    display: block;
+}
+.submenu{
+    display: none;
+}
+.quizField:hover + .submenu {
+    display: block;
+  }
+//   .quizField:hover + .submenu::after { 
+//     display: block;
+//   }
+// .quizField:hover:focus + .submenu {
+//     display: block;
+//   }
+.dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    /* margin-left: -23px; */
+    display: none;
+    position: relative;
+    /* background-color: #f9f9f9; */
+    /* min-width: 140px; */
+    /* box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); */
+    /* z-index: 1; */
+  }
+  .fontsize{
+   font-size: 11px;
+ }
+  .dropdown-content a {
+    color: black;
+    /* padding: 12px 20px; */
+    /* text-decoration: none; */
+    display: relative;
+  }
+  
+  .dropdown-content a:hover {
+   background-color: #f1f1f1
+   
+}
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }

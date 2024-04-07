@@ -1,0 +1,36 @@
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header">
+            <h5>Copy questions from another Quiz</h5><span>Here you can copy questions from another quiz into this quiz.
+                (Multiple selection enabled)</span>
+        </div>
+        <div class="card-body tab2-card">
+            <div class="row">
+                <div class="col-sm-12">
+                    <!-- <div class="form-group row">
+                              
+                                        <input class="form-control col-md-5" style="margin: auto; text-align: center;"
+                                            id="validationCustom0" type="text" required="" placeholder="Quiz Name" >
+                                    </div> -->
+
+                    <div class="form-group row justify-content-center">
+                        <select class="form-control col-md-5" required="">
+                            <option value="" selected>--Select--</option>
+                            <option [value]="college.collegeId" *ngFor="let college of colleges;">
+                                {{college.collegeName}}</option>
+                        </select>
+                   </div>
+                    <div class="form-group row justify-content-center">
+                        <ng-multiselect-dropdown [placeholder]="'--Select--'" [settings]="dropdownSettings"
+                            [data]="questions" [(ngModel)]="selectedItems">
+                        </ng-multiselect-dropdown>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-primary mr-1 mb-3" style="float: right;" (click)="saveQuestions()">Copy
+                Questions</button>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->

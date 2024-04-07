@@ -1,0 +1,61 @@
+<!---------get all header list-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <label style="font-size: 20px;font-weight: 600;">Quiz List</label>
+                    <button type="button"  [routerLink]="'/dashboard/quiz/:id'" style="float: right;margin-left: 1%;" class="btn btn-primary mr-1">Add Quiz</button>            
+                </div>
+                <div class="card-body">
+                    <table class="table table-hover table-striped" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th style="width:60%">Quiz Name</th>
+                                <th>Quiz Description</th>
+                                <!-- <th></th>
+                                <th></th> -->
+                      
+                            </tr>
+                        </thead>
+                        <ng-container *ngFor="let quizz of quizList; index as i">
+                            <tbody style="height: 4rem;">
+                                <td>{{i+1}}</td>
+                                <td style="position: absolute;padding: 0; height:30%">
+                                     <!-- <a class="quizField">{{data.name}} </a> -->
+                                    <!-- <div class="submenu">
+                            <a href="#">Questions </a>| <a>Edit </a>| <a> Delete</a> | <a> Preview</a> | <a>Statistics</a>  | <a> Leaderboard</a> 
+                        </div> -->
+                        <a style="margin:auto; flex: auto" data-abc="true">
+                            <div class="dropdown">
+                                <span class="login dropbtn">{{quizz.quizName}}</span>
+                                <div class="dropdown-content">
+                                    <a [routerLink]="['/dashboard/questions',quizz.quizId]">Questions
+                                    </a>|
+                                    <a href="" data-toggle="modal" [routerLink]="['/dashboard/quiz', quizz.quizId]" data-target="#modalLoginForm" >Edit
+                                        </a>|
+                                    <a data-toggle="modal" (click)="delete(quizz.quizId)" data-target="#modalLoginForm">Delete
+
+                                        </a>|
+                                    <a href="" [routerLink]="['/dashboard/leaderboard']">LeaderBoard
+
+                                        </a>|
+                                    <a href="" [routerLink]="['/dashboard/statistics']">Statistics
+                                        </a>
+                                </div>
+                            </div>
+                        </a>
+                            </td>
+                                <td> {{quizz.description}} </td>
+                                <!-- <td><a class="badge">  <i class="fa fa-trash fa-2x" ></i></a></td>
+                                <td><a class="badge">  <i class="fa fa-edit fa-2x" ></i></a></td>   -->
+                            </tbody>
+                        </ng-container>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!---------//////////////get all header list-->

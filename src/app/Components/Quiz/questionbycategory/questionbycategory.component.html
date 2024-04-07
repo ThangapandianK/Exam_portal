@@ -1,0 +1,48 @@
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+              
+                <div class="card-body">
+                    <table class="table table-hover table-striped" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th style="border-top: none;">No</th>
+                                <th style="width:100%; border-top: none;margin:auto;">Question</th>
+                                
+
+                            </tr>
+                        </thead>
+                        <ng-container *ngFor="let ctg of categorylist | paginate:{
+                            itemsPerPage: tablesize,
+                             currentPage: page, 
+                             totalItems: count
+                        }; index as i">
+                            <tbody style="height: 4rem;">
+                                <td> {{i+1}} </td>
+                                <td style="position: relative;padding: 3; height:30%;">
+
+                        <a style="margin:auto; flex: auto" data-abc="true">
+                            <div class="dropdown" style="width:70%;" >
+                                <span class="login dropbtn" >{{ctg.question}}</span>
+            
+                            </div>
+                        </a>
+                            </td>
+                                                      
+                            </tbody>
+                        </ng-container>
+                    </table>
+                    <span> <pagination-controls 
+                        previousLabel="Prev"
+                        nextLabel="Next"
+                        (pageChange)="onTableDataChange($event)">
+                        </pagination-controls></span>
+               
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->

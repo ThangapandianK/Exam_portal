@@ -1,0 +1,106 @@
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header">
+            <h5>New User</h5>
+            <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="card-body tab2-card">
+            <ngb-tabset class="tab-coupon">
+                <ngb-tab title="Add New User">
+                    <ng-template ngbTabContent>
+                        <form #userForm="ngForm" class="needs-validation"
+                            (ngSubmit)="userForm.form.valid && addNewUser()" novalidate>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group row">
+                                        <label for="validationCustom0
+                                        " class="col-xl-3 col-md-4"><span>*</span>
+                                            First Name</label>
+                                        <input class="form-control col-md-7" name="firstName" id="validationCustom0"
+                                            type="text" #firstName="ngModel" [(ngModel)]="addUser.firstName"
+                                            [ngClass]="{ 'is-invalid':userForm.submitted && firstName.invalid || firstName.touched && firstName.invalid}"
+                                            required>
+                                        <div style="text-align: center;" class="invalid-feedback">
+                                            First Name is required </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="validationCustom0
+                                        " class="col-xl-3 col-md-4"><span>*</span>
+                                            Last Name</label>
+                                        <input class="form-control col-md-7" name="lastName" id="validationCustom0"
+                                            type="text" #lastName="ngModel" [(ngModel)]="addUser.lastName"
+                                            [ngClass]="{ 'is-invalid':userForm.submitted && lastName.invalid || lastName.touched && lastName.invalid }"
+                                            required>
+                                        <div style="text-align: center;" class="invalid-feedback">
+                                            Last Name is required </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="validationCustom0  " class="col-xl-3 col-md-4"><span>*</span>
+                                            Mobile Number</label>
+                                        <input class="form-control col-md-7" name="phoneNo" id="validationCustom0"
+                                            type="text"
+                                            onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"
+                                            #phoneNo="ngModel" [(ngModel)]="addUser.phoneNo" [pattern]="mobilePattern"
+                                            [ngClass]="{ 'is-invalid':userForm.submitted &&  phoneNo.invalid || phoneNo.touched  &&  phoneNo.invalid}"
+                                            required>
+
+                                        <div style="text-align: center;" class="invalid-feedback">
+                                            <div *ngIf="phoneNo.errors?.['required']">Mobile Number is Required</div>
+                                            <div *ngIf="phoneNo.errors?.['pattern']">Enter a valid 10 Digit Mobile
+                                                Number</div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="validationCustom0
+                                        " class="col-xl-3 col-md-4"><span>*</span>
+                                            Email Address</label>
+                                        <input class="form-control col-md-7" name="emailId" id="validationCustom0"
+                                            type="text" #emailId="ngModel" [(ngModel)]="addUser.emailId"
+                                            [pattern]="emailPattern"
+                                            [ngClass]="{ 'is-invalid':userForm.submitted && emailId.invalid || emailId.touched && emailId.invalid}"
+                                            required>
+                                        <div style="text-align: center;" class="invalid-feedback">
+                                            <div *ngIf="emailId.errors?.['required']">Email Address is Required</div>
+                                            <div *ngIf="emailId.errors?.['pattern']">Invalid Email Address</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="validationCustom0
+                                        " class="col-xl-3 col-md-4"><span>*</span>
+                                            Password</label>
+
+                                        <input class="form-control col-md-7" name="password" id="validationCustom0"
+                                            type="password" #password="ngModel" [(ngModel)]="addUser.password"
+                                            [ngClass]="{ 'is-invalid':userForm.submitted && password.invalid || password.touched && password.invalid}"
+                                            required>
+                                        <div style="text-align: center;" class="invalid-feedback">
+                                            Password is required </div>
+
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="validationCustom0" class="col-xl-3 col-md-4"><span>*</span>
+                                            BatchId</label>
+                                        <input class="form-control col-md-7" id="validationCustom0" type="text"
+                                            [(ngModel)]="batchId" name="batchId" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pull-right">
+                                <button type="submit" class="btn btn-primary" data-dismiss="modal">Add User</button>
+                            </div>
+                        </form>
+                    </ng-template>
+                </ngb-tab>
+            </ngb-tabset>
+        </div>
+        <!-- Modal footer -->
+    </div>
+</div>
+
+<!-- Container-fluid Ends-->

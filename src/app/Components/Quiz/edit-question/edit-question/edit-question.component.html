@@ -1,0 +1,305 @@
+<!-- Container-fluid starts-->
+<div class="container-fluid edit-container">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card border rounded-0">
+                <div class="card-header">
+                    <h5>Question Creation</h5>
+                </div>
+
+
+            </div>
+            <div class="card card-container border rounded-0">
+                <h3 class="card-header">Title(optional)</h3>
+
+                <div class="card-inner-container">
+                    <p class="description">
+                        The title is used for overview, it is not visible in quiz. If you leave the title field empty, a
+                        title will be generated. </p>
+                    <input name="title" class="regular-text" [(ngModel)]="quesObj.question" type="text">
+                </div>
+            </div>
+            <div class="card card-container border rounded-0">
+                <h3 class="card-header">Points(required)</h3>
+
+                <div class="card-inner-container">
+                    <div>
+                        <p class="description">
+                            Points for this question (Standard is 1 point) </p>
+                        <label>
+
+                            <input name="points" class="small-text" [(ngModel)]="quesObj.mark" type="number" min="1">
+                            Points </label>
+                        <!-- <input name="points" [disabled]="setAnswerPoints" class="small-text" value="1" type="number" min="1"> Points </label> -->
+                        <p class="description">
+                            This points will be rewarded, only if the user closes the question correctly. </p>
+                    </div>
+                    <!-- <div class="mt-2">
+                        <label>
+                            <input name="setAnswerPoints" type="checkbox" [(ngModel)]="setAnswerPoints">
+                            Different points for each answer </label>
+
+                        <p class="description">
+                            If you enable this option, you can enter different points for every answer. </p>
+                    </div>  -->
+                    <!-- <div class="mt-2" *ngIf="setAnswerPoints">
+                        <label>
+                            <input name="showPointsInBox" value="1" type="checkbox">
+                            Show reached points in the correct- and incorrect message? </label>
+                    </div> -->
+                </div>
+
+
+            </div>
+            <!--category--->
+            <div class="card card-container border rounded-0">
+                <h3 class="card-header">Category(optional)</h3>
+
+                <div class="card-inner-container">
+                    <p class="description">
+                        You can assign classify category for a question. Categories are e.g. visible in statistics
+                        function. </p>
+
+                    <p class="description">
+                        You can manage categories in global settings. </p>
+
+                        <div>
+                            <select name="category" [(ngModel)]="quesObj.categoryId" (ngModelChange)="selectCategory()">
+                              <option value="-1">---- Select Category ----</option>
+                              <option *ngFor="let category of AllCategory" [value]="category.categoryId">{{ category.categoryName }}</option>
+                            </select>
+                          </div>
+                          
+                    <div class="mt-2" *ngIf="quesObj.category === '-1'">
+                        <h3 class="card-header pl-0"> Create new category </h3>
+                        <input name="newCat" class="regular-text" [(ngModel)]="quesObj.newcategory" type="text">
+                        <button [disabled]="!quesObj.newcategory" (click)="createNewCategory()"
+                            class="ml-2 btn btn-outline-infoo create-btn"> Create </button>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="card card-container border rounded-0">
+                <h3 class="card-header">Question Required</h3>
+
+                <div class="card-inner-container">
+                    <angular-editor style="    width: 100%;" [config]="config" [mentionConfig]="mentionConfig"
+                        [(ngModel)]="quesObj.description"></angular-editor>
+                </div>
+
+
+            </div>
+            <div class="card card-container border rounded-0">
+                <h3 class="card-header">Answer type</h3>
+
+                <div class="card-inner-container">
+                    <label class="pr-3" *ngFor="let type of answerType">
+                        <input type="radio" name="answerType" [value]="type.answerTypeId"
+                            [(ngModel)]="quesObj.answerTypeId">
+                        {{type.displayText}} </label>
+                </div>
+
+
+            </div>
+            <div class="card card-container border rounded-0" *ngIf="quesObj.answerTypeId === 1">
+                <h3 class="card-header">Single choice options</h3>
+
+                <div class="card-inner-container">
+                    <p class="description">
+                        If "Different points for each answer" is activated, you can activate a special mode.<br>
+                        This changes the calculation of the points </p>
+                    <label>
+                        <input type="checkbox" name="answerPointsDiffModusActivated" value="1" disabled="disabled">
+                        Different points - modus 2 activate </label>
+                    <br><br>
+
+                    <p class="description">
+                        Disables the distinction between correct and incorrect.<br>
+                    </p>
+                    <label>
+                        <input type="checkbox" name="disableCorrect" value="1" disabled="disabled">
+                        disable correct and incorrect </label>
+
+                    <div class="pt-2">
+                        <a class="text-info" (click)="showPointCalc = !showPointCalc">Explanation of points
+                            calculation</a>
+
+                        <table class="mt-2" *ngIf="showPointCalc">
+                            <tbody>
+                                <tr>
+                                    <th class="border-0 text-center">
+                                        "Different points for each answer" enabled <br>
+                                        "Different points - mode 2" disable </th>
+                                    <th class="border-0 text-center">
+                                        "Different points for each answer" enabled <br>
+                                        "Different points - mode 2" enabled </th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Question - Single Choice - 3 Answers - Diff points mode<br>
+                                        <br>
+                                        A=3 Points [correct]<br>
+                                        B=2 Points [incorrect]<br>
+                                        C=1 Point [incorrect]<br>
+                                        <br>
+                                        = 6 Points<br>
+
+                                    </td>
+                                    <td>
+                                        Question - Single Choice - 3 Answers - Modus 2<br>
+                                        <br>
+                                        A=3 Points [correct]<br>
+                                        B=2 Points [incorrect]<br>
+                                        C=1 Point [incorrect]<br>
+                                        <br>
+                                        = 3 Points<br>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        ~~~ User 1: ~~~<br>
+                                        <br>
+                                        A=checked<br>
+                                        B=unchecked<br>
+                                        C=unchecked<br>
+                                        <br>
+                                        Result:<br>
+                                        A=correct and checked (correct) = 3 Points<br>
+                                        B=incorrect and unchecked (correct) = 2 Points<br>
+                                        C=incorrect and unchecked (correct) = 1 Points<br>
+                                        <br>
+                                        = 6 / 6 Points 100%<br>
+
+                                    </td>
+                                    <td>
+                                        ~~~ User 1: ~~~<br>
+                                        <br>
+                                        A=checked<br>
+                                        B=unchecked<br>
+                                        C=unchecked<br>
+                                        <br>
+                                        Result:<br>
+                                        A=checked = 3 Points<br>
+                                        B=unchecked = 0 Points<br>
+                                        C=unchecked = 0 Points<br>
+                                        <br>
+                                        = 3 / 3 Points 100%
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        ~~~ User 2: ~~~<br>
+                                        <br>
+                                        A=unchecked<br>
+                                        B=checked<br>
+                                        C=unchecked<br>
+                                        <br>
+                                        Result:<br>
+                                        A=correct and unchecked (incorrect) = 0 Points<br>
+                                        B=incorrect and checked (incorrect) = 0 Points<br>
+                                        C=incorrect and uncecked (correct) = 1 Points<br>
+                                        <br>
+                                        = 1 / 6 Points 16.67%<br>
+
+                                    </td>
+                                    <td>
+                                        ~~~ User 2: ~~~<br>
+                                        <br>
+                                        A=unchecked<br>
+                                        B=checked<br>
+                                        C=unchecked<br>
+                                        <br>
+                                        Result:<br>
+                                        A=unchecked = 0 Points<br>
+                                        B=checked = 2 Points<br>
+                                        C=uncecked = 0 Points<br>
+                                        <br>
+                                        = 2 / 3 Points 66,67%
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        ~~~ User 3: ~~~<br>
+                                        <br>
+                                        A=unchecked<br>
+                                        B=unchecked<br>
+                                        C=checked<br>
+                                        <br>
+                                        Result:<br>
+                                        A=correct and unchecked (incorrect) = 0 Points<br>
+                                        B=incorrect and unchecked (correct) = 2 Points<br>
+                                        C=incorrect and checked (incorrect) = 0 Points<br>
+                                        <br>
+                                        = 2 / 6 Points 33.33%<br>
+
+                                    </td>
+                                    <td>
+                                        ~~~ User 3: ~~~<br>
+                                        <br>
+                                        A=unchecked<br>
+                                        B=unchecked<br>
+                                        C=checked<br>
+                                        <br>
+                                        Result:<br>
+                                        A=unchecked = 0 Points<br>
+                                        B=unchecked = 0 Points<br>
+                                        C=checked = 1 Points<br>
+                                        <br>
+                                        = 1 / 3 Points 33,33%
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        ~~~ User 4: ~~~<br>
+                                        <br>
+                                        A=unchecked<br>
+                                        B=unchecked<br>
+                                        C=unchecked<br>
+                                        <br>
+                                        Result:<br>
+                                        A=correct and unchecked (incorrect) = 0 Points<br>
+                                        B=incorrect and unchecked (correct) = 2 Points<br>
+                                        C=incorrect and unchecked (correct) = 1 Points<br>
+                                        <br>
+                                        = 3 / 6 Points 50%<br>
+
+                                    </td>
+                                    <td>
+                                        ~~~ User 4: ~~~<br>
+                                        <br>
+                                        A=unchecked<br>
+                                        B=unchecked<br>
+                                        C=unchecked<br>
+                                        <br>
+                                        Result:<br>
+                                        A=unchecked = 0 Points<br>
+                                        B=unchecked = 0 Points<br>
+                                        C=unchecked = 0 Points<br>
+                                        <br>
+                                        = 0 / 3 Points 0%
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <div class="card card-container border rounded-0">
+                <h3 class="card-header mb-2">Answers(required)</h3>
+                <edit-question-answers [setAnswerPoints]="setAnswerPoints" [singleChoice]="quesObj.answerTypeId === 1"
+                    (answerChoices)="quesObj.answerList" (getAnswers)="getAnswers($event)"></edit-question-answers>
+                <div>
+
+                    <button type="button" class="btn button-infoo mt-2"   *ngIf="isSave" (click)="SaveQuestionAndAnswer()">Save</button>
+                    <button type="button" class="btn button-infoo mt-2"  *ngIf="isUpdate" (click)="update()">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->
